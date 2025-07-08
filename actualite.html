@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal Actualités - Mercato</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #db0007 0%, #063672 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #db0007;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .news-card h2 {
+            color: #db0007;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .news-card h3 {
+            color: #063672;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .news-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .player-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #db0007, #063672);
+        }
+
+        .player-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .player-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .player-image .placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .player-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .player-image:hover::before {
+            left: 100%;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #db0007, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #db0007;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            background: #db0007;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 5px 5px 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Arsenal FC</h1>
+            <div class="subtitle">Actualités Mercato</div>
+        </div>
+
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="tag">Priorité</div>
+                <h2>Viktor Gyökeres</h2>
+                <div class="player-image">
+                    <img src="gyokeres.jpg" alt="Viktor Gyökeres" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'placeholder\'>Photo de Viktor Gyökeres</div>'">
+                </div>
+                <p>
+                    Arsenal est en négociations avancées pour recruter <span class="highlight">Viktor Gyökeres</span>, l'attaquant suédois du Sporting Portugal.
+                    Un accord sur les conditions personnelles aurait été trouvé, mais il reste à s'entendre sur le montant du transfert avec le club portugais.
+                    Gyökeres est la priorité offensive du club pour renforcer la ligne d'attaque après une saison marquée par des blessures et un manque d'efficacité devant le but.
+                </p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">29</div>
+                        <div class="stat-label">Buts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Passes D</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">26</div>
+                        <div class="stat-label">Ans</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="tag">Ailiers</div>
+                <h2>Noni Madueke & Rodrygo</h2>
+                <div class="player-image">
+                    <img src="noni.jpg" alt="Noni Madueke" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'placeholder\'>Photo de Noni Madueke</div>'">
+                </div>
+                <p>
+                    Arsenal cible <span class="highlight">Noni Madueke</span> comme renfort offensif polyvalent, capable de jouer à gauche et à droite. Cependant, sa préférence pour le côté droit, déjà occupé par Bukayo Saka, soulève des questions.
+                </p>
+                <div class="player-image">
+                    <img src="rodrygo.jpg" alt="Rodrygo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'placeholder\'>Photo de Rodrygo</div>'">
+                </div>
+                <p>
+                    <span class="highlight">Rodrygo</span> est également une cible prioritaire pour le poste d'ailier gauche. Le Brésilien pourrait quitter le Real Madrid où il joue moins sous Xabi Alonso. Son transfert coûterait environ 80 millions d'euros, un montant supérieur à celui de Madueke.
+                    Il est peu probable qu'Arsenal signe les deux joueurs, mais l'un des deux pourrait arriver cet été pour dynamiser l'attaque.
+                </p>
+            </div>
+
+            <div class="news-card">
+                <div class="tag">Milieu</div>
+                <h3>Eberechi Eze</h3>
+                <div class="player-image">
+                    <img src="eberechi.jpg" alt="Eberechi Eze" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'placeholder\'>Photo d\'Eberechi Eze</div>'">
+                </div>
+                <p>
+                    Arsenal s'intéresse fortement à <span class="highlight">Eberechi Eze</span>, meneur de jeu de Crystal Palace, qui possède une clause libératoire estimée à 60 millions de livres.
+                    Le club voit en Eze un profil différent de Martin Odegaard, capable d'apporter plus de buts depuis le milieu de terrain (14 buts la saison passée).
+                    Tottenham est également sur le dossier, mais Eze serait ouvert à rejoindre Arsenal pour jouer la Ligue des champions.
+                </p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Buts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">60M£</div>
+                        <div class="stat-label">Clause</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">26</div>
+                        <div class="stat-label">Ans</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Arsenal FC - Actualités Mercato | Dernière mise à jour : Juillet 2025</p>
+        </div>
+    </div>
+</body>
+</html>
